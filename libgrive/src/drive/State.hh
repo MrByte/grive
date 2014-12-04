@@ -23,8 +23,10 @@
 
 #include "util/DateTime.hh"
 #include "util/FileSystem.hh"
+#include "util/Ignore.hh"
 
 #include <memory>
+#include <set>
 
 namespace gr {
 
@@ -46,7 +48,7 @@ public :
 	typedef ResourceTree::iterator iterator ;
 
 public :
-	explicit State( const fs::path& filename, const Json& options ) ;
+	explicit State( const fs::path& filename, const Json& options, const Ignore& igo ) ;
 	~State() ;
 	
 	void FromLocal( const fs::path& p ) ;
@@ -73,7 +75,7 @@ private :
 	bool Update( const Entry& e ) ;
 	std::size_t TryResolveEntry() ;
 
-	static bool IsIgnore( const std::string& filename ) ;
+	bool IsIgnore( const std::string& filename ) ;
 	
 private :
 	ResourceTree		m_res ;
@@ -81,6 +83,7 @@ private :
 	long				m_cstamp ;
 	
 	std::vector<Entry>	m_unresolved ;
+	Ignore m_ignore;
 } ;
 
 } } // end of namespace gr::v1

@@ -33,9 +33,11 @@
 
 namespace gr { namespace v1 {
 
-State::State( const fs::path& filename, const Json& options  ) :
-    m_res		( options["path"].Str() ),
-	m_cstamp	( -1 )
+
+State::State( const fs::path& filename, const Json& options, const Ignore& igo ) :
+	m_res ( options["path"].Str() ),
+	m_cstamp ( -1 ),
+	m_ignore ( igo )
 {
 	Read( filename ) ;
 	
@@ -60,7 +62,9 @@ void State::FromLocal( const fs::path& p )
 
 bool State::IsIgnore( const std::string& filename )
 {
-	return filename[0] == '.' ;
+ 	return m_ignore.Contains(filename);
+	//filename == ".grive" || filename == ".grive_state" || filename == ".trash";
+	//return filename[0] == '.' ;
 }
 
 void State::FromLocal( const fs::path& p, Resource* folder )

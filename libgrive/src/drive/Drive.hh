@@ -24,6 +24,7 @@
 #include "http/Header.hh"
 #include "protocol/Json.hh"
 #include "util/Exception.hh"
+#include "util/Ignore.hh"
 
 #include <string>
 #include <vector>
@@ -42,7 +43,7 @@ class Entry ;
 class Drive
 {
 public :
-	Drive( http::Agent *agent, const Json& options ) ;
+	Drive( http::Agent *http, const Json& options, const Ignore& igno ) ;
 
 	void DetectChanges() ;
 	void Update() ;

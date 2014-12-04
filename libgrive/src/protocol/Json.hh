@@ -100,6 +100,8 @@ public :
 	Json FindInArray( const std::string& key, const std::string& value ) const ;
 	bool FindInArray( const std::string& key, const std::string& value, Json& result ) const ;
 	
+	void Remove( const std::string& key ) ;
+
 	/**	Expect *this is a JSON array of objects. Select all "key" values inside each
 		objects in the array and copies them in the output iterator \a out.
 	*/

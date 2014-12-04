@@ -281,6 +281,14 @@ void Json::Add( const std::string& key, const Json& json )
 	::json_object_get( json.m_json ) ;
 	::json_object_object_add( m_json, key.c_str(), json.m_json ) ;
 }
+void Json::Remove( const std::string& key )
+	{
+	assert( m_json != 0 ) ;
+	
+	::json_object_object_del( m_json, key.c_str() ) ;
+	}
+	
+
 
 void Json::Add( const Json& json )
 {
